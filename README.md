@@ -2,22 +2,22 @@
 # Launching a Parachain
 
 ## Build & Launch Relay chain
-Build the Polkadot binary:
-```shell
-./scripts/build.sh
-```
+- Build the Polkadot binary:
+  ```shell
+  ./scripts/build.sh
+  ```
+- Launch the relay chain: uses zombienet to quickly bring up a `rococo-local` network.
+  ```shell
+  ./scripts/launch.sh
+  ```
+  Keep this process running for the duration of the remaining steps, as closing it will reset the relay chain state.
 
-Launch the relay chain: uses zombienet to quickly bring up a `rococo-local` network.
-```shell
-./scripts/launch.sh
-```
-Keep this process running for the duration of the remaining steps, as closing it will reset the relay chain state.
 
-Copy the raw chain spec of the relay chain from the temp directory located at the beginning of the zombienet output.
-```shell
-# For example,
-cp  /var/folders/z6/nldslwt943vb8k0rhbsb1j180000gn/T/zombie-6cac64c7973f5be424b319d75db40e34_-630-9SmQU2dA6FGv/rococo-local-raw.json ./
-```
+- Copy the raw chain spec of the relay chain from the temp directory located at the beginning of the zombienet output.
+  ```shell
+  # For example,
+  cp  /var/folders/z6/nldslwt943vb8k0rhbsb1j180000gn/T/zombie-6cac64c7973f5be424b319d75db40e34_-630-9SmQU2dA6FGv/rococo-local-raw.json ./
+  ```
 
 ## Reserve Parachain Identifier
 - Open local [Polkadot/Substrate Portal](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9900#/explorer) to connect to the relay chain in browser
