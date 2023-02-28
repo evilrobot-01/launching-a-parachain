@@ -1,0 +1,14 @@
+# Relay chain, using `rococo-local`
+[relaychain]
+chain = "rococo-local"
+default_command = "./polkadot/target/release/polkadot"
+
+    [[relaychain.nodes]]
+    name = "alice"
+    ws_port = 9900
+
+    [[relaychain.nodes]]
+    name = "bob"
+
+    [[relaychain.nodes]]
+    name = "charlie"
