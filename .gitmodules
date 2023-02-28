@@ -1,0 +1,8 @@
+[submodule "polkadot"]
+	path = polkadot
+	url = https://github.com/paritytech/polkadot
+	branch = release-v0.9.37
+[submodule "substrate-parachain-node"]
+	path = substrate-parachain-node
+	url = https://github.com/evilrobot-01/substrate-parachain-node/
+	branch = polkadot-deep-dive
