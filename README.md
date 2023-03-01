@@ -1,7 +1,14 @@
 
 # Launching a Parachain
 
-Uses:
+## Overview:
+This repository provides a guide for launching an initial parachain on a local test network followed by an upgrade.
+
+It has two submodules which link to `polkadot` (0.9.37) and to a slightly modified version of the Substrate Cumulus parachain template: an `initial` runtime with the `sudo` pallet added and `pallet-template` removed, and then an `upgrade` runtime with the default template runtime restored. 
+
+The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries and [`launch.sh`](./scripts/launch.sh) launches a local relay chain using `zombienet`, as defined in [`config.toml`](./config.toml). The [`clean.sh`](./scripts/clean.sh) script removes files generated whilst following the guide.
+
+### Tools:
 - [Polkadot](./polkadot): relay chain
 - [Substrate Cumulus Parachain Template](./substrate-parachain-node): parachain template
 - [zombienet](https://github.com/paritytech/zombienet): launching relay chain
