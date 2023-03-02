@@ -23,7 +23,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
   ```
 - Launch the relay chain using `zombienet` to quickly bring up a `rococo-local` network.
   ```shell
-  ./scripts/launch.sh
+  zombienet spawn config.toml -p native # or ./scripts/launch.sh
   ```
   Keep this process running for the duration of the remaining steps, as closing it will reset the relay chain state.
 
@@ -36,7 +36,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
 
 ## Reserve Parachain Identifier
 - Open local [Polkadot/Substrate Portal](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9900#/explorer) to connect to the relay chain in browser
-- Click **Network**, **Parachains**, **Parathreads**, **+ ParaId**
+- Click **Network**, **Parachains**, **Parathreads**, **+ ParaId** (or click [here](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9900#/parachains/parathreads))
 - Select **Ferdie** under 'reserve from', click **+ Submit** and **Sign and Submit**
 - Check the list of recent events for `registrar.Reserved` and also note the `balances.Reserved` event.
 
@@ -59,7 +59,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
   - **Note:** Does not currently work on Apple silicon, `initial` WebAssembly runtime built via CI should be downloaded from [here](https://github.com/evilrobot-01/substrate-parachain-node/actions/workflows/build-runtime.yml).
   Verify wasm hashes using:
     ```shell
-    subwasm info ./*initial*.wasm
+    subwasm info parachain_template_initial_runtime.compact.compressed.wasm
     ```
   - Local command would be as follows, but ignored:
     ```shell
@@ -70,7 +70,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
   ```shell
   ./substrate-parachain-node/target/release/parachain-template-node export-genesis-state --chain raw-parachain-chainspec.json para-2000-genesis-state
   ```
-- Start a collator node, manually replacing the `ZOMBIENET_RELAY_BOOTNODE` placeholder below with the bootnode listed in the zombienet launch output:
+- Start a collator node, manually replacing the `PORT` placeholder below with the port of the bootnode listed in the zombienet launch output:
   ```shell
   ./substrate-parachain-node/target/release/parachain-template-node \
   --alice \
@@ -86,7 +86,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
   --chain rococo-local-raw.json \
   --port 30343 \
   --ws-port 9977 \
-  --bootnodes ZOMBIENET_RELAY_BOOTNODE
+  --bootnodes /ip4/127.0.0.1/tcp/PORT/ws/p2p/12D3KooWQCkBm1BYtkHpocxCwMgR8yjitEeHGx8spzcDLGt2gkBm
   ```
   Note: the arguments after the `--` are for the embedded relay chain node.
   
@@ -109,7 +109,7 @@ The [`build.sh`](./scripts/build.sh) script simply builds the initial binaries a
 - Download the `upgrade` runtime from [here](https://github.com/evilrobot-01/substrate-parachain-node/actions/workflows/build-runtime.yml).
 - Verify the wasm hashes:
   ```shell
-  subwasm info ./*upgrade*.wasm
+  subwasm info parachain_template_upgrade_runtime.compact.compressed.wasm
   ```
 - Open [Polkadot/Substrate Portal](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:8844#/explorer) to perform a parachain runtime upgrade.
 - Navigate to **Developer**, **Sudo**, select **parachainSystem** and **authorizeUpgrade(codeHash)**.
